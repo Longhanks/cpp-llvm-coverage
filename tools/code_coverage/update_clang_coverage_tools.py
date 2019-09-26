@@ -6,7 +6,7 @@
 
 import os
 import sys
-import urllib2
+# import urllib2
 
 sys.path.append(
     os.path.join(

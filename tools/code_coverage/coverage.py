@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/python
 # Copyright 2017 The Chromium Authors. All rights reserved.
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
@@ -78,7 +78,7 @@ import re
 import shlex
 import shutil
 import subprocess
-import urllib2
+# import urllib2
 
 sys.path.append(
     os.path.join(
@@ -143,7 +143,7 @@ FILE_BUG_MESSAGE = (
     'If it persists, please file a bug with the command you used, git revision '
     'and args.gn config here: '
     'https://bugs.chromium.org/p/chromium/issues/entry?'
-    'components=Tools%3ECodeCoverage')
+    'components=Infra%3ETest%3ECodeCoverage')
 
 # String to replace with actual llvm profile path.
 LLVM_PROFILE_FILE_PATH_SUBSTITUTION = '<llvm_profile_file_path>'
@@ -590,7 +590,7 @@ def _GeneratePerFileCoverageSummary(binary_paths, profdata_file_path, filters,
   if ignore_filename_regex:
     subprocess_cmd.append('-ignore-filename-regex=%s' % ignore_filename_regex)
 
-  export_output = subprocess.check_output(subprocess_cmd)
+  export_output = subprocess.check_output(subprocess_cmd, universal_newlines=True)
 
   # Write output on the disk to be used by code coverage bot.
   with open(_GetSummaryFilePath(), 'w') as f:
